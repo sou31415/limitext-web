@@ -55,17 +55,24 @@
 }
 
 .container {
-  margin: 0;
-  padding-top: 10vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
+  border-radius: 46px;
+  background: #e0e0e0;
+  box-shadow: 21px 21px 43px #aaaaaa, -21px -21px 43px #ffffff;
+  z-index: 1;
+  padding: 2%;
+  margin: 5% 10%;
+}
+
+.box {
+  font-style: iteric;
+  font-size: 1.7em;
+  z-index: 2;
+  color: #000000;
 }
 
 .logo {
   height: 6em;
-  padding: 1.5em;
+  padding: 1.3em;
   will-change: filter;
   transition: 0.75s;
 }
@@ -132,7 +139,10 @@ button {
 @media (prefers-color-scheme: dark) {
   :root {
     color: #f6f6f6;
+    /*
     background-color: #2f2f2f;
+    */
+    background-color: #ffffff;
   }
 
   a:hover {
