@@ -4,6 +4,8 @@ import { ADDRESS } from "./secret";
 import { BaseType } from "./type";
 const App: React.FC = () => {
 	const [info, setInfo] = useState<Array<BaseType>>([]);
+	//const [name, setName] = useState<String>("");
+	//const [pass, setPass] = useState<String>("");
 	useEffect(() => {
 		const fetchData = async () => {
 			try {
@@ -26,6 +28,13 @@ const App: React.FC = () => {
 			<p className="box">{x.message}</p>
 		</div>
 	);
+	/*
+	const loginpage = (): JSX.Element => {
+		return (
+			<form></form>
+		)
+	};
+	*/
 	return (
 		<>
 			{resource}
