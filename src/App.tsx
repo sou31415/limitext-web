@@ -1,21 +1,25 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { ADDRESS } from './secret';
 import { BaseType } from './type';
 import "./App.css";
 const App: React.FC = () => {
-	const [user, setUser] = useState<string>('');
-	const [message, setMessage] = useState<string>('');
+	const [user, setUser] = useState<string>("");
+	const userRef = useRef<HTMLInputElement>(null!);
+	const [message, setMessage] = useState<string>("");
 	const [messages, setMessages] = useState<Array<BaseType>>([]);
 	const [pass, setPass] = useState<string>("");
+	const passRef = useRef<HTMLInputElement>(null!);
 	const [login, setLogin] = useState<boolean>(false);
 
 	const handleLogin = async () => {
+		setPass(passRef.current.value);
+		setUser(userRef.current.value);
 		const response = await fetch(ADDRESS + '/login/cert', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify({ user: user, pass: pass }),
+			body: JSON.stringify({ user: userRef.current.value, pass: passRef.current.value }),
 		});
 		const stat = await response.text();
 		if (stat === "Ok") {
@@ -27,8 +31,8 @@ const App: React.FC = () => {
 	};
 
 	const [resource, setResource] = useState<JSX.Element>(<div><center>
-		<input type="text" placeholder="Enter your name..." onChange={(e) => setUser(e.target.value)} /><br />
-		<input type="password" placeholder="Enter the password..." onChange={(e) => setPass(e.target.value)} /><br />
+		<input type="text" placeholder="Enter your name..." ref={userRef} /><br />
+		<input type="password" placeholder="Enter the password..." ref={passRef} /><br />
 		<button onClick={handleLogin}>Login(Register)</button></center>
 	</div>);
 	const Logout = () => {
