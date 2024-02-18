@@ -32,7 +32,7 @@ const App: React.FC = () => {
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify({ user: user, message: message, time: getCurrentUnixTimeBigInt }),
+			body: JSON.stringify({ user: user, message: message, time: getCurrentUnixTimeBigInt().toString() }),
 		});
 	};
 
