@@ -98,6 +98,7 @@ a:hover {
 
 h1 {
   text-align: center;
+  color: #24c8db;
 }
 
 @media (prefers-color-scheme: dark) {

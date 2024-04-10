@@ -6,6 +6,7 @@ const App: React.FC = () => {
 	const [user, setUser] = useState<string>("");
 	const userRef = useRef<HTMLInputElement>(null!);
 	const [message, setMessage] = useState<string>("");
+	const messageRef = useRef<HTMLInputElement>(null!);
 	const [messages, setMessages] = useState<Array<BaseType>>([]);
 	const [pass, setPass] = useState<string>("");
 	const passRef = useRef<HTMLInputElement>(null!);
@@ -37,6 +38,7 @@ const App: React.FC = () => {
 	</div>);
 	const Logout = () => {
 		setLogin(false);
+		window.location.reload();
 	}
 	useEffect(() => {
 		const fetchData = async () => {
@@ -53,7 +55,7 @@ const App: React.FC = () => {
 				setResource(<div>
 					<div><button onClick={Logout}>Logout</button>
 						<center>
-							<input type="text" value={message} placeholder="Your Message" onChange={(e) => setMessage(e.target.value)} />
+							<input type="text" placeholder="Your Message" ref={messageRef} />
 							<br /><button onClick={handleSubmit}>Send Message</button>
 						</center>
 					</div>
@@ -81,12 +83,13 @@ const App: React.FC = () => {
 			headers: {
 				'Content-Type': 'application/json',
 			},
-			body: JSON.stringify({ user: user, message: message, time: getCurrentUnixTimeBigInt().toString() }),
+			body: JSON.stringify({ user: user, message: messageRef.current.value, time: getCurrentUnixTimeBigInt().toString() }),
 		});
 	};
 
 	return (
 		<>
+			<h1>Limitext</h1>
 			{resource}
 		</>
 	);
